@@ -144,9 +144,9 @@ func parse(data []byte) [][16]byte {
 	return chunks
 }
 
-func (c *Context) Encrypt(plaintext []byte, additional []byte) []byte {
+func (c *Context) Encrypt(plaintext []byte, associated []byte) []byte {
 	c.initialize()
-	c.processAssociated(additional)
+	c.processAssociated(associated)
 	ciphertext := c.processPlaintext(plaintext)
 	tag := c.finalize()
 

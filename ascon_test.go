@@ -16,7 +16,7 @@ func TestContext_Encrypt(t *testing.T) {
 		key        string
 		nonce      string
 		plaintext  string
-		additional string
+		associated string
 		ciphertext string
 	}
 
@@ -8745,14 +8745,14 @@ func TestContext_Encrypt(t *testing.T) {
 			plaintext, err := hex.DecodeString(tc.plaintext)
 			require.NoError(t, err)
 
-			additional, err := hex.DecodeString(tc.additional)
+			associated, err := hex.DecodeString(tc.associated)
 			require.NoError(t, err)
 
 			ciphertext, err := hex.DecodeString(tc.ciphertext)
 			require.NoError(t, err)
 
 			ctx := ascon.NewContext([16]byte(key), [16]byte(nonce))
-			result := ctx.Encrypt(plaintext, additional)
+			result := ctx.Encrypt(plaintext, associated)
 			assert.Equal(t, ciphertext, result)
 		})
 	}
